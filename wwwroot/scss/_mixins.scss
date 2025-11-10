@@ -1,0 +1,90 @@
+@import 'variables';
+
+@function get-genre-color($genre) {
+  @return map-get($genre-colors, $genre);
+}
+
+@mixin movie-card($genre: action) {
+  background-color: $card-background;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid get-genre-color($genre);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+
+  .movie-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .movie-content {
+    padding: $spacing-md;
+  }
+
+  .movie-title {
+    font-size: $font-size-large;
+    font-weight: bold;
+    color: $text-color;
+    margin-bottom: $spacing-xs;
+    line-height: 1.4;
+  }
+
+  .movie-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background-color: rgba(get-genre-color($genre), 0.1);
+    border-radius: $border-radius-sm;
+    color: get-genre-color($genre);
+    font-weight: 600;
+    font-size: $font-size-base;
+
+    .rating-star {
+      color: #ffc107;
+      font-size: 1.1em;
+    }
+  }
+
+  .movie-genre {
+    display: inline-block;
+    margin-top: $spacing-xs;
+    padding: 0.25rem $spacing-sm;
+    background-color: get-genre-color($genre);
+    color: $text-light;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-small;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+@mixin responsive-grid($columns: 4, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin genre-section($genre) {
+  background: linear-gradient(135deg, rgba(get-genre-color($genre), 0.1) 0%, rgba(get-genre-color($genre), 0.05) 100%);
+  padding: $spacing-xl;
+  margin-bottom: $spacing-lg;
+  border-radius: $border-radius-lg;
+
+  .section-title {
+    color: get-genre-color($genre);
+    font-size: $font-size-xxl;
+    font-weight: bold;
+    margin-bottom: $spacing-lg;
+    text-transform: capitalize;
+    border-bottom: 3px solid get-genre-color($genre);
+    padding-bottom: $spacing-sm;
+  }
+}

@@ -1,0 +1,29 @@
+@import 'variables';
+
+@function calc-percentage($part, $total) {
+  @return percentage($part / $total);
+}
+
+@function calc-column-width($columns, $total-columns: 12) {
+  @return calc-percentage($columns, $total-columns);
+}
+
+@function spacing($multiplier: 1) {
+  @return $spacing-md * $multiplier;
+}
+
+@function font-scale($multiplier: 1) {
+  @return $font-size-base * $multiplier;
+}
+
+@function darken-genre($genre, $amount: 10%) {
+  @return darken(map-get($genre-colors, $genre), $amount);
+}
+
+@function lighten-genre($genre, $amount: 10%) {
+  @return lighten(map-get($genre-colors, $genre), $amount);
+}
+
+@function aspect-ratio($width, $height) {
+  @return percentage($height / $width);
+}

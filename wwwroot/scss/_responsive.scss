@@ -1,0 +1,43 @@
+@import 'variables';
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: $breakpoint-xs - 1px) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm - 1px) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md - 1px) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == mobile {
+    @media (max-width: $breakpoint-sm - 1px) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md - 1px) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+}
+
+@mixin responsive-grid-columns() {
+  @include respond-to(mobile) { grid-template-columns: 1fr; }
+  @include respond-to(tablet) { grid-template-columns: repeat(2, 1fr); }
+  @include respond-to(desktop) { grid-template-columns: repeat(4, 1fr); }
+  @include respond-to(xl) { grid-template-columns: repeat(5, 1fr); }
+}
+
+@mixin responsive-font-size($base-size: $font-size-base) {
+  font-size: $base-size;
+  @include respond-to(mobile) { font-size: $base-size * 0.875; }
+  @include respond-to(tablet) { font-size: $base-size * 0.9375; }
+  @include respond-to(desktop) { font-size: $base-size; }
+}
+
+@mixin responsive-padding($base-padding: $spacing-md) {
+  padding: $base-padding;
+  @include respond-to(mobile) { padding: $base-padding * 0.5; }
+  @include respond-to(tablet) { padding: $base-padding * 0.75; }
+  @include respond-to(desktop) { padding: $base-padding; }
+}
+

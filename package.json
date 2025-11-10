@@ -1,0 +1,22 @@
+{
+  "name": "movie-collection-sass",
+  "version": "1.0.0",
+  "description": "Movie collection website with SASS implementation",
+  "scripts": {
+    "sass": "sass wwwroot/scss/main.scss wwwroot/css/main.css",
+    "sass:watch": "sass --watch wwwroot/scss/main.scss wwwroot/css/main.css",
+    "sass:compressed": "sass wwwroot/scss/main.scss wwwroot/css/main.css --style compressed"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "movies",
+    "responsive"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}
+

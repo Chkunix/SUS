@@ -1,0 +1,80 @@
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+@import 'responsive';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  color: $text-color;
+  background-color: $background-color;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  @include respond-to(mobile) { padding: $spacing-sm; }
+}
+
+.header {
+  background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
+  color: $text-light;
+  padding: spacing(2);
+  text-align: center;
+  box-shadow: $shadow-md;
+  margin-bottom: spacing(2);
+  h1 {
+    @include responsive-font-size($font-size-xxl);
+    font-weight: bold;
+  }
+}
+
+.movies-grid {
+  @include responsive-grid(4, spacing(1.5));
+  @include responsive-grid-columns();
+  margin-bottom: spacing(2);
+}
+
+$genres: action, comedy, drama, horror, thriller, romance, sci-fi, fantasy, animation, documentary;
+
+.genre-section {
+  @include genre-section(action);
+  @each $genre in $genres {
+    &.#{$genre} { @include genre-section($genre); }
+  }
+}
+
+.movie-card {
+  @include movie-card(action);
+  @each $genre in $genres {
+    &.#{$genre} { @include movie-card($genre); }
+  }
+  .movie-image {
+    height: calc(300px + (100vw - 320px) * 0.1);
+    @include respond-to(mobile) { height: 250px; }
+  }
+  .movie-content { @include responsive-padding($spacing-md); }
+  .movie-title { @include responsive-font-size($font-size-large); }
+}
+
+.width-25 { width: calc-column-width(3, 12); }
+.width-50 { width: calc-column-width(6, 12); }
+.width-75 { width: calc-column-width(9, 12); }
+.width-100 { width: calc-column-width(12, 12); }
+
+.footer {
+  background-color: $primary-color;
+  color: $text-light;
+  text-align: center;
+  padding: spacing(1.5);
+  margin-top: spacing(3);
+  box-shadow: $shadow-md;
+}
